@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module TunesTakeout
   class Application < Rails::Application
+    RSpotify::authenticate("<your_client_id>", "<your_client_secret>")
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
