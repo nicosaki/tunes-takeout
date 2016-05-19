@@ -6,7 +6,7 @@ class SuggestionsController < ApplicationController
   end
 
   def favorites
-    @user = #set user, and set user id
+    @user = current_user
     @favorites = TunesTakeout.user_favorites(user_id) #returns array of pairing id's, FIX CALL
   end
 
