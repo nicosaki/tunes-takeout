@@ -1,6 +1,6 @@
 # require '/lib/tunes_takeout_wrapper'
 class SuggestionsController < ApplicationController
-
+  skip_before_action :require_login, only: :index
   def index
     #shows top 20 suggestions, ranked by total number of favorites
   end
