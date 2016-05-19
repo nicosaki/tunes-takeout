@@ -150,8 +150,6 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
     rest_client (1.8.3)
       netrc (~> 0.7.7)
     rspotify (1.10.0)
@@ -216,7 +214,6 @@ DEPENDENCIES
   pg (~> 0.15)
   pry-rails
   rails (= 4.2.6)
-  rest-client
   rspotify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

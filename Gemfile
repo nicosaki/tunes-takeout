@@ -24,8 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'httparty'
 
 gem 'rspotify'
-  gem 'rest-client'
-  
+
 gem 'yelp', require: 'yelp'
 
 gem "omniauth"
