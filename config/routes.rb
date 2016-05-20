@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   # get '/auth/:provider' => 'session#login'
   get '/auth/:provider/callback' => 'sessions#create'
   delete '/logout' => 'sessions#destroy', as: "logout"
+  get '/search/:query' => 'suggestions#search', as: "search"
+  get '/suggestion/:id' => 'suggestions#pair', as: "specific_suggestion"
+  get '/user/favorites' => 'suggestions#favorites', as: "favorites"
+  post '/user/suggestion' => 'suggestions#favorite', as: "add_fave"
+  delete '/user/suggestion' => 'suggestions#unfavorite', as: "unfave"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
