@@ -7,7 +7,7 @@ attr_reader :food
 
   def self.retrieve(id)
     # food = HTTParty.get(YELP_URL + "/v2/business/#{id}")
-    food = Yelp.client.business(id).business
+    food = Yelp.client.business(id.parameterize).business
     Food.new(food)
   end
 end

@@ -1,9 +1,9 @@
 class Music
-
+attr_reader :name, :artist, :url, :album, :music
   def initialize(music, type)
     @name = music.name
-    @artist = music.artists unless type == "artists"
-    @url = music.artists[0].external_urls["spotify"]
+    @artist = music.artists unless type == "artist"
+    @url = music.artists[0].external_urls["spotify"] unless type =="artist"
     # @tracks = music.tracks_cache
     @album = music.album unless type == "album"
     # @cover = cover_art(music)

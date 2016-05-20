@@ -1,3 +1,9 @@
 <% @suggestions.each do |hash|%>
-  <%= hash %>
+  <div class = "suggestion">
+    <% food = hash["food_id"]%>
+    <%= food.food.name %>
+    <% sound = hash["music_id"]%>
+    <%= sound.music.name %>
+
+  </div>
 <%end%>
