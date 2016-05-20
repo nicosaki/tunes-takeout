@@ -1,8 +1,8 @@
 require 'httparty'
 
-class TunesTakeout
+class TunesTakeoutWrapper
   BASE_URL = "https://tunes-takeout-api.herokuapp.com/"
-  attr_reader :suggestions
+  attr_reader :suggestions, :suggestion
 
   def initialize(data)
     if data["suggestions"]
@@ -43,6 +43,17 @@ class TunesTakeout
     self.new(data)
   end
 
-  private
+  def self.favorite(user_id, suggestion_id)
+    HTTParty.post(BASE_URL + "/v1/users/#{user_id}/favorites", { body: {"suggestion": suggestion_id}}.to_json)
+  end
+
+  def self.unfavorite(user_id, suggestion_id)
+    HTTParty.delete(BASE_URL + "/v1/users/#{user_id}/favorites", { body: {"suggestion": suggestion_id}}.to_json)
+  end
+
+  def self.top(limit = 20)
+    data = HTTParty.get(BASE_URL + "/v1/suggestions/top?limit=#{limit}").parsed_response
+    self.new(data)
+  end
 
 end
