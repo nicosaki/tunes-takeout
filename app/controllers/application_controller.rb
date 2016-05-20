@@ -16,4 +16,30 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def get_food(suggestions)
+    if suggestions.count == 1
+      food = Food.find(id)
+    end
+    food_array = []
+    suggestions.each do |hash|
+      hash["food_id"] = id
+      food = Food.find(id)
+      food_array << food
+    end
+    return food_array
+  end
+
+  def get_music(suggestions)
+    if suggestions.count == 1
+      music = Music.find(id)
+    end
+    music_array = []
+    suggestions.each do |hash|
+      hash["music_id"] = id
+      music = Music.find(id)
+      music_array << music
+    end
+    return music_array
+  end
 end
