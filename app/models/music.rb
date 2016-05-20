@@ -1,7 +1,12 @@
 class Music
-  SPOTIFY_URL = "https://api.spotify.com"
 
-  def initialize(music)
+  def initialize(music, type)
+    @name = music.name
+    @artist = music.artists unless type == "artists"
+    @url = music.artists[0].external_urls["spotify"]
+    # @tracks = music.tracks_cache
+    @album = music.album unless type == "album"
+    # @cover = cover_art(music)
     @music = music
   end
 
@@ -16,6 +21,11 @@ class Music
       music = "OTHER TYPE"
     end
     # music = HTTParty.get(SPOTIFY_URL + "/v1/#{type}/#{id}").parsed_response
-    Music.new(music)
+    Music.new(music, type)
+  end
+
+  def cover_art(music)
+    cover_art = music.images[0]["url"]
+    # cover_art = music.images[1]["url"]
   end
 end
