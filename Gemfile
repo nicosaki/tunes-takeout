@@ -53,6 +53,10 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "dotenv-rails"
+  # gem 'vcr'
+  gem "minitest-vcr"
+  gem "webmock"
+  gem "minitest-reporters"
 end
 
 group :development do
