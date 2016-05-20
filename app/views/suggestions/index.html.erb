@@ -1,2 +1,12 @@
 <h1>This is the suggestions index page</h1>
 <%= params%>
+<%= @top%>
+
+<div class="col-sm-3 col-md-3">
+  <%= form_tag search_path(:query), method: 'get', class: 'navbar-form', role: 'search' do %>
+    <div class="input-group">
+      <%= text_field_tag :query, params[:query], size: 150, placeholder: "Search", class: "form-control"%>
+    </div>
+    <%= submit_tag 'Search', class: 'btn btn-success' %>
+  <% end %>
+</div>
