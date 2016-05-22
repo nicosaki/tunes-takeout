@@ -11,10 +11,19 @@
     <nav class= "navbar">
       <ul class="nav navbar-nav">
       <li><%= link_to "Home", root_path %></li>
-
+      <li><%= (current_user.nil?) ? ("Hello, Guest.") : ("Hello, #{current_user.name}") %></li>
+      <li>
+        <div class="col-sm-3 col-md-3">
+          <%= form_tag search_path(:query), method: 'get', class: 'navbar-form', role: 'search' do %>
+            <div class="input-group">
+              <%= text_field_tag :query, params[:query], size: 150, placeholder: "Search", class: "form-control"%>
+            </div>
+            <%= submit_tag 'Search', class: 'btn btn-success' %>
+          <% end %>
+        </div>
+      </li>
       <li><%= link_to "Log In", "/auth/spotify" unless current_user %></li>
       <li><%= link_to "Log Out", logout_path, method: :delete if current_user%></li>
-      <li><%= (current_user.nil?) ? ("Hello, Guest.") : ("Hello, #{current_user.name}") %></li>
     </ul>
     </nav>
   </header>
