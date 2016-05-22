@@ -25,7 +25,7 @@ attr_reader :name, :artist, :url, :album, :cover
   def cover_art(music, type)
     cover_art_array = []
     if type == "album" || type == "artist"
-      cover_arts = music.images
+      return music.images
     else
       cover_arts = music.album.images
     end

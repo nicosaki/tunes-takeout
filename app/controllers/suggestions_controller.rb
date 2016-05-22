@@ -1,9 +1,9 @@
 # require '/lib/tunes_takeout_wrapper'
 class SuggestionsController < ApplicationController
   skip_before_action :require_login, only: :index
+
   def index
-    @suggestions = TunesTakeoutWrapper.top(4)
-    @suggestions = extract_suggestions(@suggestions)
+    @suggestions = extract_suggestions(TunesTakeoutWrapper.top(4))
     #shows top 20 suggestions, ranked by total number of favorites
     @user = current_user
     # if current_user
@@ -13,7 +13,10 @@ class SuggestionsController < ApplicationController
 
   def favorites #display user favorites
     @user = current_user
-    @favorites = TunesTakeoutWrapper.user_favorites(@user.user_id) #returns array of pairing id's, FIX CALL
+    @suggestions = TunesTakeoutWrapper.user_favorites(@user.uid)
+    unless @suggestions.suggestions ==[]
+      @suggestions = extract_suggestions(@suggestions) #returns array of pairing id's, FIX CALL
+    end
   end
 
   def favorite

@@ -6,9 +6,17 @@ class TunesTakeoutWrapper
 
   def initialize(data)
     if data["suggestions"]
-      @suggestions = data["suggestions"]
+      if data["suggestions"].class == Array
+        @suggestions = data["suggestions"]
+      else
+        @suggestions = data["suggestions"].suggestions
+      end
     elsif data["suggestion"]
-      @suggestion = data["suggestion"]
+      if data["suggestion"].class == Array|| data["suggestion"].class == Hash
+        @suggestion = data["suggestion"]
+      else
+        @suggestion = data["suggestion"].suggestion
+      end
     else
       @errors = "No data returned"
     end

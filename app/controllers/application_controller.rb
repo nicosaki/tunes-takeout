@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def extract_suggestions(suggestions)
-    if suggestions.suggestions[0].class == String
+    if suggestions.class != Array
       suggestions = pull_from_id(suggestions.suggestions)
       suggestions.each do |suggestion_hash|
         food = suggestion_hash.suggestion["food_id"]

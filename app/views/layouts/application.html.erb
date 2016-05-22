@@ -23,6 +23,9 @@
         </div>
       </li>
       <li><%= link_to "Log In", "/auth/spotify" unless current_user %></li>
+      <li>
+        <%= link_to "My favorites", favorites_path(current_user.id) if current_user%>
+      </li>
       <li><%= link_to "Log Out", logout_path, method: :delete if current_user%></li>
     </ul>
     </nav>
