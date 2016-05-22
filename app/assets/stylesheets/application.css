@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+.float-right {
+  float: right;
+}
+
+.covers img{
+  height: 170px;
+  width: 170px;
+}
+
+.suggestion {
+  clear: both;
+  float: left:
+}
