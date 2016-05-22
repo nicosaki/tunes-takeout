@@ -1,8 +1,12 @@
 class Food
-attr_reader :food
+attr_reader :food, :name, :address, :url, :rating, :image
 
   def initialize(food)
-    @food = food
+    @name = food.name
+    @address = food.location
+    @url = food.mobile_url
+    @rating = food.rating_img_url
+    @image = food.image_url
   end
 
   def self.retrieve(id)
