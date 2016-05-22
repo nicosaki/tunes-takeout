@@ -1,9 +1,4 @@
-<% @suggestions.each do |hash|%>
-  <div class = "suggestion">
-    <% food = hash["food_id"]%>
-    <%= food.food.name %>
-    <% sound = hash["music_id"]%>
-    <%= sound.music.name %>
+<h1>Search results for "<%= params["query"]%>"</h1>
+<%=params%>
 
-  </div>
-<%end%>
+<%=render partial: "suggestion"%>

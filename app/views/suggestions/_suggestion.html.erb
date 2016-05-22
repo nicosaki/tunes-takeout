@@ -1,0 +1,17 @@
+<% @suggestions.each do |hash|%>
+<div class = "suggestion">
+  <% if hash.class == TunesTakeoutWrapper %>
+    <% hash = hash.suggestion %>
+  <%end%>
+  Eat at
+  <% food = hash["food_suggestion"]%>
+  <%= link_to food.name, "https://yelp.com/biz/#{hash["food_id"]}" %><%= image_tag "#{food.rating}" %>
+  <section class = "float-right"><%= image_tag "#{food.image}" %><%= food.address.address[0]%></section>
+  <br />
+  While listening to the <%= hash["music_type"]%>
+  <% sound = hash["music_suggestion"]%>
+  <%= link_to sound.name, sound.url %>
+  <section class = "float-right covers"><%= image_tag "#{sound.cover[0]}" %> <%= food.address.address[0]%></section>
+</div>
+<br />
+<%end%>
