@@ -17,6 +17,32 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def extract_suggestions(suggestions)
+    if suggestions.suggestions[0].class == String
+      suggestions = pull_from_id(suggestions.suggestions)
+      suggestions.each do |suggestion_hash|
+        food = suggestion_hash.suggestion["food_id"]
+        suggestion_hash.suggestion["food_suggestion"]= Food.retrieve(food)
+        suggestion_hash.suggestion["music_suggestion"] = Music.retrieve(suggestion_hash.suggestion["music_id"], suggestion_hash.suggestion["music_type"])
+      end
+      return suggestions
+    end
+    suggestions.each do |suggestion_hash|
+      food = suggestion_hash["food_id"]
+      suggestion_hash["food_suggestion"]= Food.retrieve(food)
+      suggestion_hash["music_suggestion"] = Music.retrieve(suggestion_hash["music_id"], suggestion_hash["music_type"])
+    end
+    return suggestions
+  end
+
+  def pull_from_id(suggestions)
+    hashes = []
+    suggestions.each do |id|
+      hashes << TunesTakeoutWrapper.specific_suggestion(id)
+    end
+    return hashes
+  end
+
   def get_food(suggestions)
     if suggestions.count == 1
       food = Food.find(id)
