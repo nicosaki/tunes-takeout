@@ -2,7 +2,8 @@
 class SuggestionsController < ApplicationController
   skip_before_action :require_login, only: :index
   def index
-    @top = TunesTakeoutWrapper.top(4)
+    @suggestions = TunesTakeoutWrapper.top(4)
+    @suggestions = extract_suggestions(@suggestions)
     #shows top 20 suggestions, ranked by total number of favorites
     @user = current_user
     # if current_user
@@ -27,12 +28,8 @@ class SuggestionsController < ApplicationController
 
   def search
     @user = current_user
-    @suggestions = TunesTakeoutWrapper.search(params[:query]).suggestions
-    @suggestions.each do |suggestion_hash|
-      food = suggestion_hash["food_id"]
-      suggestion_hash["food_id"]= Food.retrieve(food)
-      suggestion_hash["music_id"] = Music.retrieve(suggestion_hash["music_id"], suggestion_hash["music_type"])
-    end
+    @suggestions = TunesTakeoutWrapper.limited_search(params["query"], 4).suggestions
+    @suggestions = extract_suggestions(@suggestions)
     render :results
   end
 
