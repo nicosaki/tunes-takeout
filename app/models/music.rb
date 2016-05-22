@@ -1,13 +1,11 @@
 class Music
-attr_reader :name, :artist, :url, :album, :music
+attr_reader :name, :artist, :url, :album, :cover
   def initialize(music, type)
     @name = music.name
     @artist = music.artists unless type == "artist"
     @url = music.artists[0].external_urls["spotify"] unless type =="artist"
     # @tracks = music.tracks_cache
-    @album = music.album unless type == "album"
-    # @cover = cover_art(music)
-    @music = music
+    @cover = cover_art(music, type)
   end
 
   def self.retrieve(id, type)
@@ -24,8 +22,16 @@ attr_reader :name, :artist, :url, :album, :music
     Music.new(music, type)
   end
 
-  def cover_art(music)
-    cover_art = music.images[0]["url"]
-    # cover_art = music.images[1]["url"]
+  def cover_art(music, type)
+    cover_art_array = []
+    if type == "album" || type == "artist"
+      cover_arts = music.images
+    else
+      cover_arts = music.album.images
+    end
+    cover_arts.each do |cover|
+      cover_art_array << cover["url"]
+    end
+    return cover_art_array
   end
 end
