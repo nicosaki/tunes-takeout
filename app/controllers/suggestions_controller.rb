@@ -21,17 +21,23 @@ class SuggestionsController < ApplicationController
 
   def favorite
     @user = current_user
-    @suggestion = TunesTakeoutWrapper.favorite(@user.user_id, suggestion_id)
+    @path = params[:path]
+    @suggestion_id = params[:format]
+    @suggestion = TunesTakeoutWrapper.favorite(@user.uid, @suggestion_id)
+    redirect_to favorites_path(current_user.uid)#path.to_sym
   end
 
   def unfavorite
     @user = current_user
-    @suggestion = TunesTakeoutWrapper.unfavorite(@user.user_id, suggestion_id)
+    @suggestion_id = params[:format]
+    @suggestion = TunesTakeoutWrapper.unfavorite(@user.uid, @suggestion_id)
+    @path = params[:path]
+    redirect_to favorites_path(current_user.uid)# path.to_sym
   end
 
   def search
     @user = current_user
-    @suggestions = TunesTakeoutWrapper.limited_search(params["query"], 4).suggestions
+    @suggestions = TunesTakeoutWrapper.limited_search(params[:query], 4).suggestions
     @suggestions = extract_suggestions(@suggestions)
     render :results
   end

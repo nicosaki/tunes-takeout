@@ -52,11 +52,17 @@ class TunesTakeoutWrapper
   end
 
   def self.favorite(user_id, suggestion_id)
-    HTTParty.post(BASE_URL + "/v1/users/#{user_id}/favorites", { body: {"suggestion": suggestion_id}}.to_json)
+    fave_request = HTTParty.post(BASE_URL + "/v1/users/#{user_id}/favorites",
+    body: {"suggestion"=> "#{suggestion_id}"}.to_json,
+    headers: {"Content-Type" => "application/json" })
+    return fave_request.code
   end
 
   def self.unfavorite(user_id, suggestion_id)
-    HTTParty.delete(BASE_URL + "/v1/users/#{user_id}/favorites", { body: {"suggestion": suggestion_id}}.to_json)
+    unfave_request = HTTParty.delete(BASE_URL + "/v1/users/#{user_id}/favorites",
+    body: {"suggestion"=> "#{suggestion_id}"}.to_json,
+    headers: {"Content-Type" => "application/json" })
+    return unfave_request.code
   end
 
   def self.top(limit = 20)
