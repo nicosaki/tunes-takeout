@@ -15,14 +15,16 @@
     <%= link_to sound.name, sound.url %>
     <section class = "float-right covers"><%= (sound.cover.class == Array) ? (image_tag "#{sound.cover[0]["url"]}") : (image_tag "#{sound.cover["url"]}") %> <%= food.address.address[0]%></section>
     <div class = "fave-button">
-      <% user_faves = TunesTakeoutWrapper.user_favorites(@user.uid)%>
-      <% unless user_faves ==[]%>
-        <% user_faves = user_faves.suggestions%> #returns array of pairing id's %>
-      <%end%>
-      <% if user_faves.include? hash["id"] %>
-        <%= link_to "Unfavorite this pairing", unfave_path(hash["id"], @path), method: :delete, class: "btn btn-danger" %>
-      <% else%>
-      <%= link_to "Favorite this pairing", add_fave_path(hash["id"], @path), method: :post, class: "btn btn-primary" %>
+      <% if current_user %>
+        <% user_faves = TunesTakeoutWrapper.user_favorites(current_user.uid)%>
+        <% unless user_faves ==[]%>
+          <% user_faves = user_faves.suggestions%> #returns array of pairing id's %>
+        <%end%>
+        <% if user_faves.include? hash["id"] %>
+          <%= link_to "Unfavorite this pairing", unfave_path(hash["id"], @path), method: :delete, class: "btn btn-danger" %>
+        <% else%>
+        <%= link_to "Favorite this pairing", add_fave_path(hash["id"], @path), method: :post, class: "btn btn-primary" %>
+        <%end%>
       <%end%>
     </div>
     </div>

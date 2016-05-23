@@ -5,7 +5,11 @@ class SuggestionsController < ApplicationController
   def index
     @suggestions = extract_suggestions(TunesTakeoutWrapper.top(4))
     #shows top 20 suggestions, ranked by total number of favorites
-    @user = current_user
+    if current_user
+      @spotify_user = RSpotify::User.find(@current_user.uid)
+      @user = current_user
+      @image = @spotify_user.images[0]["url"]
+    end
     # if current_user
     #   @favorites = TunesTakeoutWrapper.user_favorites(@user.user_id)
     # end

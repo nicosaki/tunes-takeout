@@ -26,6 +26,12 @@
       <li>
         <%= link_to "My favorites", favorites_path(current_user.id) if current_user%>
       </li>
+      <li class= "user-photo"><% if @user && @image %>
+        <%= image_tag "#{@image}" %>
+        <%else%>
+        <%= image_tag "http://localhost:3000/assets/artist_image.jpg"%>
+        <%end%>
+      </li>
       <li><%= link_to "Log Out", logout_path, method: :delete if current_user%></li>
     </ul>
     </nav>
