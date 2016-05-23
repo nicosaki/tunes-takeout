@@ -23,15 +23,18 @@ attr_reader :name, :artist, :url, :album, :cover
   end
 
   def cover_art(music, type)
-    cover_art_array = []
-    if type == "album" || type == "artist"
-      return music.images
+    if type == "album"
+      return music.images[0]
+    elsif type == "artist"
+      if music.images == []
+        return {"url" => "http://localhost:3000/assets/artist_image.jpg"}
+      else
+        return music.images
+      end
+    elsif type == "track"
+      return music.album.images[0]
     else
-      cover_arts = music.album.images
+      return "WHAT DO?!"
     end
-    cover_arts.each do |cover|
-      cover_art_array << cover["url"]
-    end
-    return cover_art_array
   end
 end
